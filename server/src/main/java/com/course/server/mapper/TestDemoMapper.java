@@ -1,6 +1,6 @@
-package com.course.system.mapper;
+package com.course.server.mapper;
 
-import com.course.system.domain.TestDemoDto;
+import com.course.server.domain.TestDemoDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

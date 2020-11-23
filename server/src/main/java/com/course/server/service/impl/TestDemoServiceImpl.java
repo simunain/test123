@@ -1,8 +1,8 @@
-package com.course.system.service.impl;
+package com.course.server.service.impl;
 
-import com.course.system.domain.TestDemoDto;
-import com.course.system.mapper.TestDemoMapper;
-import com.course.system.service.TestDemoService;
+import com.course.server.domain.TestDemoDto;
+import com.course.server.mapper.TestDemoMapper;
+import com.course.server.service.TestDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

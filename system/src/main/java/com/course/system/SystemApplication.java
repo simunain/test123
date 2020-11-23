@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.course.system.mapper")//扫描 mybatis mapper 包路径
+@MapperScan(basePackages = "com.course.server.mapper")//扫描 mybatis mapper 包路径
 public class SystemApplication {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SystemApplication.class);

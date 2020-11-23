@@ -1,8 +1,8 @@
 package com.course.system.controller;
 
 
-import com.course.system.domain.TestDemoDto;
-import com.course.system.service.TestDemoService;
+import com.course.server.domain.TestDemoDto;
+import com.course.server.service.TestDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
