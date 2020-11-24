@@ -12,7 +12,7 @@ import org.springframework.core.env.Environment;
 @SpringBootApplication
 @EnableEurekaClient
 @ComponentScan("com.course")
-@MapperScan(basePackages = "com.course.server.mapper")//扫描 mybatis mapper 包路径
+@MapperScan("com.course.server.mapper")//扫描 mybatis mapper 包路径
 public class SystemApplication {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SystemApplication.class);
