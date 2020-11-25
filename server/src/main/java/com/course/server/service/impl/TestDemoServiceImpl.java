@@ -13,10 +13,39 @@ public class TestDemoServiceImpl  implements TestDemoService {
 
     @Autowired
     private TestDemoMapper testDemoMapper;
+
     @Override
     public List<TestDemoDto>  queryservice() {
         System.out.println("asd");
         List<TestDemoDto> k=testDemoMapper.querymapper();
+
+/*        MemberCourseExample  memberCourseExample = new MemberCourseExample();
+        memberCourseExample.createCriteria().andIdEqualTo("1");
+
+        return memberCourseMapper.selectByExample();*/
         return k;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
