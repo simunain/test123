@@ -1,6 +1,7 @@
 package com.course.system.controller;
 
 
+import com.course.server.domain.Test;
 import com.course.server.domain.TestDemoDto;
 import com.course.server.service.TestDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,25 @@ public class TsetController {
         return testDemoService.queryservice();
     }
 
+    //初次使用example
+    @RequestMapping("/ooxxexample")
+    @ResponseBody
+    public List<Test> testqwerExample(){
+        System.out.println("Exampleservice");
+        return testDemoService.queryExampleservice();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
