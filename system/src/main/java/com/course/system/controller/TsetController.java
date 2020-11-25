@@ -35,6 +35,14 @@ public class TsetController {
         System.out.println("Exampleservice");
         return testDemoService.queryExampleservice();
     }
+
+    //初次使用example
+    @RequestMapping("/ooxxexampletwo")
+    @ResponseBody
+    public List<Test> testqwerExampletwo(){
+        System.out.println("Exampleservice");
+        return testDemoService.queryExampletwoservice();
+    }
 }
 
 
