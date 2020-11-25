@@ -42,10 +42,13 @@ public class TestDemoServiceImpl  implements TestDemoService {
         Test test=new Test();
         test.setId("123"); test.setName("test实体内容");
         testMapper.insert(test);
-        test.setId("123456"); test.setName("test实体内容");
-        testMapper.insert(test);
+        Test testt=new Test();
+        testt.setId("123456"); testt.setName("test实体内容");
+        testMapper.insert(testt);
         //更新
-        testMapper.updateByPrimaryKey(test);
+        Test testtt=new Test();
+        testtt.setId("123456"); testtt.setName("ttttt");
+        testMapper.updateByPrimaryKey(testtt);
 
         List<TestDemoDto> k=testDemoMapper.querymapper();
         TestExample  testExample= new TestExample();
