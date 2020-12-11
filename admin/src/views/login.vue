@@ -48,12 +48,13 @@
                                                 <div class="clearfix">
                                                     <label class="inline">
                                                         <input type="checkbox" class="ace" />
-                                                        <span class="lbl"> Remember Me</span>
+                                                        <span class="lbl"> 记住密码</span>
                                                     </label>
 
-                                                    <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                                    <button type="button" class="width-35 pull-right btn btn-sm btn-primary"
+                                                    @click="login()">
                                                         <i class="ace-icon fa fa-key"></i>
-                                                        <span class="bigger-110">Login</span>
+                                                        <span class="bigger-110">登录</span>
                                                     </button>
                                                 </div>
 
@@ -244,10 +245,23 @@
 <!--注意
 再说上面的template标签中是不允许有script标签的,script标签要写在template标签下面-->
 <script>
-    $('body').attr('class', 'login-layout light-login');
 
     export default {
-        name: 'login'
+        name: 'login',
+        //mounted表示添加钩子函数,钩子函数一般是在页面渲染之后执行,在methods之前执行
+        mounted:function(){
+            //删除样式no-skin
+            $('body').removeClass( 'no-skin');
+            //添加样式login-layout light-login
+            $('body').attr('class', 'login-layout light-login');
+        },
+        //添加vue事件(也就是js方法逻辑),这里的时间是login
+        methods:{
+            login(){
+                //login事件触发之后会跳转admin地址
+                this.$router.push("/admin")
+            }
+        }
     }
 </script>
 

@@ -1,8 +1,8 @@
 import  Vue from 'vue'
-import Router from 'vue-router'
-import Login from "./views/login.vue"
+import  Router from 'vue-router'
+import  Login from "./views/login.vue"
 import  Admin from "./views/admin"
-
+import  Welcome from "./views/admin/welcome"
 Vue.use(Router);
 
 export default new Router({
@@ -22,8 +22,13 @@ export default new Router({
     },
         {
             path:'/admin',
-            component:Admin
-        }
+            component:Admin,
+           // admin的 子路由
+            children:[{
+                path:'welcome',
+                component:Welcome
+            }]
+        },
 
     ]
     }

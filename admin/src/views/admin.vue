@@ -940,7 +940,10 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
-
+                            <!-- 路由匹配到的组件将显示在这里
+                            其实就是匹配路由配置组件,渲染到这里
+                            然后其实是匹配到子路由里的内容也就是welcome.vue组件的内容-->
+                            <router-view>   </router-view>
                             <!-- PAGE CONTENT ENDS -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -987,12 +990,25 @@
 
 <script>
 
-    $('body').removeClass('login-layout light-login');
-    //添加样式
-    //把原先blank.html的样式添加到这里
-    $('body').attr('class', 'no-skin');
-
-
+    export default {
+        name: 'login',
+        //mounted表示添加钩子函数,钩子函数一般是在页面渲染之后执行,在methods之前执行
+        mounted:function(){
+            //删除light-login这个样式
+            $('body').removeClass('login-layout light-login');
+            //添加样式
+            //把原先blank.html的样式添加到这里
+            $('body').attr('class', 'no-skin');
+        },
+        //添加vue事件(也就是js方法逻辑),这里的时间是login
+        methods:{
+            //login方法可以编写登入校验逻辑
+            login(){
+                //login事件触发之后会跳转admin地址
+                this.$router.push("/admin")
+            }
+        }
+    }
 </script>
 
 
