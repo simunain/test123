@@ -3,6 +3,7 @@
   <!--  注意
   在template标签里只能有一个div标签,所以需要用一个div标签把其他的标签包裹起来-->
 <div>
+    <h1>我是admin组件</h1>
 
     <div id="navbar" class="navbar navbar-default          ace-save-state">
         <div class="navbar-container ace-save-state" id="navbar-container">
@@ -20,7 +21,7 @@
                 <a href="index.html" class="navbar-brand">
                     <small>
                         <i class="fa fa-leaf"></i>
-在线视频教程
+                        在线视频教程
                     </small>
                 </a>
             </div>
@@ -364,10 +365,10 @@
 
             <ul class="nav nav-list">
                 <li class="">
-                    <a href="index.html">
+                    <router-link to="welcome">
                         <i class="menu-icon fa fa-tachometer"></i>
                         <span class="menu-text"> 欢迎 </span>
-                    </a>
+                    </router-link>
 
                     <b class="arrow"></b>
                 </li>
@@ -381,32 +382,55 @@
                         <b class="arrow fa fa-angle-down"></b>
                     </a>
 
-                    <b class="arrow"></b>
+                        <b class="arrow"></b>
 
                     <ul class="submenu">
                         <!--这里的ul表示是上面的li子菜单,也就是说用户管理和权限管理是系统管理的子菜单-->
                         <li class="">
-                            <a href="tables.html">
+                            <router-link to="login">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 用户管理
-                            </a>
+                            </router-link>>
 
                             <b class="arrow"></b>
                         </li>
 
                         <li class="">
-                            <a href="jqgrid.html">
+                            <router-link to="login">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 权限管理
-                            </a>
+                            </router-link>>
 
-                            <b class="arrow"></b>
                         </li>
                     </ul>
                 </li>
 
+                <li class="active open"><!--active open这个表示使用展开的样式-->
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-list"></i>
+                        <span class="menu-text"> 业务管理 </span>
 
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <!--这里的ul表示是上面的li子菜单,也就是说用户管理和权限管理是系统管理的子菜单-->
+                        <li class="">
+                            <!-- 添加路由地址跳转
+                            使用方式
+                            直接去路由表里组件路由地址得了path:'business/chapter',-->
+                            <router-link to="business/chapter">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                大章管理
+                            </router-link>>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
             </ul><!-- /.nav-list -->
+
+
+
 
             <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
                 <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -535,7 +559,7 @@
 <script>
 
     export default {
-        name: 'login',
+        name: 'admin',
         //mounted表示添加钩子函数,钩子函数一般是在页面渲染之后执行,在methods之前执行
         mounted:function(){
             //删除light-login这个样式
@@ -545,13 +569,7 @@
             $('body').attr('class', 'no-skin');
         },
         //添加vue事件(也就是js方法逻辑),这里的时间是login
-        methods:{
-            //login方法可以编写登入校验逻辑
-            login(){
-                //login事件触发之后会跳转admin地址
-                this.$router.push("/admin")
-            }
-        }
+
     }
 </script>
 

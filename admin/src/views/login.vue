@@ -258,8 +258,8 @@
         //添加vue事件(也就是js方法逻辑),这里的时间是login
         methods:{
             login(){
-                //login事件触发之后会跳转admin地址
-                this.$router.push("/admin")
+                //login事件触发之后会跳转welcome组件地址
+                this.$router.push("/welcome")
             }
         }
     }
