@@ -984,8 +984,27 @@
 <script>
 
     export default {
-        name: 'welcome'
+        name: 'chapter',
+        //mounted表示添加钩子函数,钩子函数一般是在页面渲染之后执行,在methods之前执行,会自动执行钩子函数里的方法
+        mounted: function() {
+            //列如页面渲染完之后会自动执行list方法
+            this.list();
 
+},
+        //添加vue事件(也就是js方法逻辑),这里的事件是list
+    methods: {
+            //list表示一个事件方法
+        list() {
+            //定义一个成员变量_this,表示可以引用当前对象的关键词
+            let _this=this;
+            //$ajax表示使用axios.因为在main.js定义了axios全局变量为$ajxs
+            //then(Response)里的Response为请求后台返回的数据
+            //get为请求后台方法地址
+            _this.$ajax.get('http://localhost:9002/business/admin/chapter/list').then((Response)=>{
+                console.log("查询大章节列表结果:",Response);
+            })
+        }
+    }
     }
 </script>
 

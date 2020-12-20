@@ -41,6 +41,14 @@ public class ChapterController {
 
         return chapterService.queryExampleservicetwo();
     }
+    //初次使用example
+    @RequestMapping("/chapter/list")
+    @ResponseBody
+    public List<Chapterdto> listqwerExampletwoo(){
+        System.out.println("Exampleservicetwo");
+
+        return chapterService.queryExampleservicetwo();
+    }
 }
 
 
