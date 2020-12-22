@@ -7,6 +7,7 @@ import com.course.server.mapper.TestDemoMapper;
 import com.course.server.mapper.TestMapper;
 import com.course.server.service.ChapterService;
 import com.course.server.service.TestDemoService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,10 @@ public class ChapterServiceImpl implements ChapterService {
 
     //使用吧正常实体类转为dto实体类,进行数据交互,便于管理和维护,开发友善
     public List<Chapterdto>  queryExampleservicetwo() {
-
+        //分页,设置从第一页开始,一页显示1条数据
+        PageHelper.startPage(1, 1);
+        //分页,设置从第一页开始,一页显示10条数据
+       // PageHelper.startPage(1, 10);
         ChapterExample chapterExample= new ChapterExample();
         chapterExample.createCriteria().andIdEqualTo("00000001");
         //相当于select id, `name`FROM test WHERE ( id = '1' );
