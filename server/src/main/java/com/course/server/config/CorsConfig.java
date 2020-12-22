@@ -1,4 +1,4 @@
-package com.course.server.config;
+/*package com.course.server.config;
 
  import org.springframework.context.annotation.Configuration;
  import org.springframework.web.cors.CorsConfiguration;
@@ -20,4 +20,4 @@ package com.course.server.config;
                  .maxAge(3600);  // 1小时内不需要再预检（发OPTIONS请求）
      }
 
- }
+ }*/
