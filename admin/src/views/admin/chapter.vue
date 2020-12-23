@@ -7,7 +7,7 @@
             刷新
         </button>
     </p>
-    <pagination ref="pagination" v-bind:list="list" ></pagination>
+    <pagination ref="pagination" v-bind:list="list" v-bind:itemCount="8"></pagination>
     <!-- PAGE CONTENT BEGINS 出现这个东西就是页面内容了-->
             <table id="simple-table" class="table  table-bordered table-hover">
                 <thead>
