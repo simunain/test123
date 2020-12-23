@@ -219,12 +219,15 @@
                 //$ajax表示使用axios.因为在main.js定义了axios全局变量为$ajxs
                 //then(Response)里的Response为请求后台返回的数据
                 //get为请求后台方法地址
-                _this.$ajax.get('http://localhost:9000/business/admin/chapter/list').then((Response)=>{
+                _this.$ajax.post('http://localhost:9000/business/admin/chapter/postlistPageDto',{
+                    page:1,
+                    size:3
+                }).then((Response)=>{
                     //alert("走到这个方法里的这段代码了了");
                     console.log("查询大章节列表结果:",Response);
                     //赋值给上面的 chapters: []
-                    //注意为什么要点data呢,因为返回来的数据是被data包括起来的,所以要想使用返回来的数据先点data
-                    _this.chapters=Response.data;
+                    //注意为什么要点data在点list呢,因为返回来的数据是被list包括起来然后list又被data包括请来的,所以要想使用返回来的数据先点data.list
+                    _this.chapters=Response.data.list;
                     //alert("2222222走到这个方法里的这段代码了了");
                 }).catch(error => { //当请求后台代码出现错误的时候会进入到这个方法里
                     console.log("请求出现错误:",error);

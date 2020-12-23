@@ -1,14 +1,13 @@
 package com.course.business.controller.admin;
 
 
+import ch.qos.logback.classic.Logger;
 import com.course.server.domain.Chapter;
 import com.course.server.dto.Chapterdto;
+import com.course.server.dto.PageDto;
 import com.course.server.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,6 +57,14 @@ public class ChapterController {
         System.out.println("Exampleservicetwo");
 
         return chapterService.queryExampleservicetwo();
+    }
+
+    //自定义分页实体
+    @PostMapping("/chapter/postlistPageDto")
+    public PageDto postExampletwooPageDto(@RequestBody PageDto pageDto){
+        System.out.println("Exampleservicetwo");
+        PageDto pageDto1 = chapterService.queryExampleservicetwoPageDto(pageDto);
+        return pageDto1;
     }
 }
 
