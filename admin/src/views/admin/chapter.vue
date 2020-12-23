@@ -1,8 +1,14 @@
 <template>
-
+<div>
+    <p>
+        <!--新增一个刷新的按钮,重新去执行list方法,去查询查询一次数据达到刷新的效果-->
+        <button v-on:click="list(1)" class="btn btn-white btn-default btn-round">
+        <i class="ace-icon fa fa-refresh"></i>
+            刷新
+        </button>
+    </p>
+    <pagination ref="pagination" v-bind:list="list" ></pagination>
     <!-- PAGE CONTENT BEGINS 出现这个东西就是页面内容了-->
-    <div class="row">
-        <div class="col-xs-12">
             <table id="simple-table" class="table  table-bordered table-hover">
                 <thead>
                 <!--tr设置表列,th表示有几列并且给没列设置列名,列如下边有四列-->
@@ -19,9 +25,9 @@
 <!--一个tr表示一行数据,-->
                 <tr v-for="cha in chapters"> <!--遍历已经赋值完成的chapters: [],然后遍历赋值给cha-->
                    <!-- 每一个td表示一列数据,放在td里的数据是上面的th列名的内容-->
-                    <td>{{cha.id}}}</td> <!--把遍历得到的值赋值到这里-->
-                    <td>{{cha.name}}}</td>
-                    <td>{{cha.courseId}}}</td>
+                    <td>{{cha.id}}</td> <!--把遍历得到的值赋值到这里-->
+                    <td>{{cha.name}}</td>
+                    <td>{{cha.courseId}}</td>
 
                     <td>
                         <div class="hidden-sm hidden-xs btn-group">
@@ -186,16 +192,19 @@
                 </tr>
                 </tbody>
             </table>
-        </div><!-- /.span -->
-    </div><!-- /.row -->
+
+</div>
 </template>
 
 <!--添加login的script-->
 <!--注意
 再说上面的template标签中是不允许有script标签的,script标签要写在template标签下面-->
 <script>
-
+    //1.先使用import导入你要在该组件中使用的pagination子组件
+    import Pagination from "../../components/pagination";
     export default {
+    //在components中写入pagination子组件
+        components: {Pagination},
         name: 'chapter',
         data: function(){
             return{
@@ -208,20 +217,20 @@
         //mounted表示添加钩子函数,钩子函数一般是在页面渲染之后执行,在methods之前执行,会自动执行钩子函数里的方法
         mounted: function() {
             //列如页面渲染完之后会自动执行list方法
-            this.list();
+            this.list(1);
         },
         //添加vue事件(也就是js方法逻辑),这里的事件是list
         methods: {
             //list表示一个事件方法
-            list() {
+            list(page) {
                 //定义一个成员变量_this,表示可以引用当前对象的关键词
                 let _this=this;
                 //$ajax表示使用axios.因为在main.js定义了axios全局变量为$ajxs
                 //then(Response)里的Response为请求后台返回的数据
                 //get为请求后台方法地址
                 _this.$ajax.post('http://localhost:9000/business/admin/chapter/postlistPageDto',{
-                    page:1,
-                    size:3
+                    page: page,
+                    size: _this.$refs.pagination.size
                 }).then((Response)=>{
                     //alert("走到这个方法里的这段代码了了");
                     console.log("查询大章节列表结果:",Response);
@@ -229,6 +238,7 @@
                     //注意为什么要点data在点list呢,因为返回来的数据是被list包括起来然后list又被data包括请来的,所以要想使用返回来的数据先点data.list
                     _this.chapters=Response.data.list;
                     //alert("2222222走到这个方法里的这段代码了了");
+                    _this.$refs.pagination.render(page, Response.data.total);
                 }).catch(error => { //当请求后台代码出现错误的时候会进入到这个方法里
                     console.log("请求出现错误:",error);
                     return error

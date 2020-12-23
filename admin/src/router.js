@@ -4,6 +4,8 @@ import  Login from "./views/login.vue"
 import  Admin from "./views/admin"
 import  Welcome from "./views/admin/welcome"
 import Chapter from "./views/admin/chapter"
+import xxx from "./components/xxx"
+import xxxtwo from "./components/xxx2"
 Vue.use(Router);
 
 export default new Router({
@@ -20,7 +22,14 @@ export default new Router({
     },{
         path:"/login",
         component:Login
+    },{
+        path:"/xx",
+        component:xxx
     },
+        {
+            path:"/xxtwo",
+            component:xxxtwo
+        },
         {
             path:"/",
             component:Admin,
