@@ -312,15 +312,18 @@
                 //process.env.VUE_APP_SERVER在  ----  F:\Workspace\course\admin\.env.prod
                 _this.$ajax.post( 'http://localhost:9000/business/admin/chapter/save', _this.chapter).then((response)=>{
 
-                    let resp = response.data.list;
-                    console.log("请求出现错误:"+response);
+                    let resp = response.data;
+                    console.log("resp.success:"+resp.success);
+                    console.log("resp.data.success:"+resp);
+                    console.log("死神:"+response.data);
+                    console.log("死神:"+response.data.success);
 
                     if (resp.success) {
                         $("#form-modal").modal("hide");
                         _this.list(1);
-                        Toast.success("保存成功！");
+                        alert("保存成功！");
                     } else {
-                        Toast.warning(resp.message)
+                        alert("保存失败！");
                     }
                 })
             },

@@ -68,6 +68,7 @@ public class ChapterController {
         return pageDto1;
     }
     @PostMapping("/chapter/save")
+    @ResponseBody
     public ResponseDto save(@RequestBody Chapterdto chapterDto) {
         //封装需要参数---可以打野返回状态码,返回消息,返回数据等
         ResponseDto responseDto = new ResponseDto();
