@@ -19,4 +19,6 @@ public interface ChapterService {
     //自定义分页实体
     PageDto queryExampleservicetwoPageDto(PageDto pageDto);
 
+    //保存
+    public void save(Chapterdto chapterDto);
 }

@@ -8,6 +8,7 @@ import com.course.server.mapper.TestDemoMapper;
 import com.course.server.mapper.TestMapper;
 import com.course.server.service.ChapterService;
 import com.course.server.service.TestDemoService;
+import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
@@ -102,6 +103,16 @@ public class ChapterServiceImpl implements ChapterService {
         pageDto.setList(pageInfo.getList());//结果集
         return pageDto;
     }
+
+    public void save(Chapterdto chapterDto) {
+        //使用工具类生成不可重复的uuid---然后在设置给id
+        chapterDto.setId(UuidUtil.getShortUuid());
+        Chapter chapter = new Chapter();
+        BeanUtils.copyProperties(chapterDto, chapter);
+
+        chapterMapper.insert(chapter);
+    }
+
 }
 
 

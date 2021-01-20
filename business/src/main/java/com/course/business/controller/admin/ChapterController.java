@@ -5,6 +5,7 @@ import ch.qos.logback.classic.Logger;
 import com.course.server.domain.Chapter;
 import com.course.server.dto.Chapterdto;
 import com.course.server.dto.PageDto;
+import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +67,16 @@ public class ChapterController {
         PageDto pageDto1 = chapterService.queryExampleservicetwoPageDto(pageDto);
         return pageDto1;
     }
+    @PostMapping("/chapter/save")
+    public ResponseDto save(@RequestBody Chapterdto chapterDto) {
+        //封装需要参数---可以打野返回状态码,返回消息,返回数据等
+        ResponseDto responseDto = new ResponseDto();
+        chapterService.save(chapterDto);
+        responseDto.setContent(chapterDto);
+
+        return responseDto;
+    }
+
 }
 
 

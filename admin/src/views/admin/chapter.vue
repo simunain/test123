@@ -1,6 +1,13 @@
 <template>
 <div>
     <p>
+        <button v-on:click="toSection(chapter)" class="btn btn-white btn-xs btn-info btn-round">
+            小节
+        </button>&nbsp;
+        <button v-on:click="add()" class="btn btn-white btn-default btn-round">
+            <i class="ace-icon fa fa-edit"></i>
+            新增
+        </button>
         <!--新增一个刷新的按钮,重新去执行list方法,去查询查询一次数据达到刷新的效果-->
         <button v-on:click="list(1)" class="btn btn-white btn-default btn-round">
         <i class="ace-icon fa fa-refresh"></i>
@@ -193,7 +200,40 @@
                 </tbody>
             </table>
 
+    <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">表单</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称</label>
+                            <div class="col-sm-10">
+                                <input v-model="chapter.name" class="form-control" placeholder="名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">课程</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">{{course.name}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button v-on:click="save()" type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
+
+
+
 </template>
 
 <!--添加login的script-->
@@ -211,16 +251,31 @@
                 //定义组件变量chapters为数组变量,
                 //这样子的好处是,提供给当前组件使用该变量,列如可以在script里的事件里使用,也可以在页面其他标签里使用,
                 //列如这里的list事件里  _this.chapters=Response;进行把返回的参数赋值给了这里的chapters: []
-                chapters: []
+                chapter: {},
+                chapters: [],
+                course: {},
             }
         },
         //mounted表示添加钩子函数,钩子函数一般是在页面渲染之后执行,在methods之前执行,会自动执行钩子函数里的方法
         mounted: function() {
             //列如页面渲染完之后会自动执行list方法
-            this.list(1);
+            let _this = this;
+            _this.$refs.pagination.size = 5;
+
+            _this.list(1);
+            // sidebar激活样式方法一
+           // this.$parent.activeSidebar("business-course-sidebar");
         },
         //添加vue事件(也就是js方法逻辑),这里的事件是list
         methods: {
+            /**
+             * 点击【新增】----打开这个<div id="form-modal" class="modal fade" tabindex="-1" role="dialog">表单
+             */
+            add() {
+                let _this = this;
+                _this.chapter = {};
+                $("#form-modal").modal("show");
+            },
             //list表示一个事件方法
             list(page) {
                 //定义一个成员变量_this,表示可以引用当前对象的关键词
@@ -243,6 +298,58 @@
                     console.log("请求出现错误:",error);
                     return error
                 })
+            },
+
+            /**
+             * 点击【保存】
+             */
+            save(page) {
+                let _this = this;
+
+
+                _this.chapter.courseId = _this.course.id;
+
+                //process.env.VUE_APP_SERVER在  ----  F:\Workspace\course\admin\.env.prod
+                _this.$ajax.post( 'http://localhost:9000/business/admin/chapter/save', _this.chapter).then((response)=>{
+
+                    let resp = response.data.list;
+                    console.log("请求出现错误:"+response);
+
+                    if (resp.success) {
+                        $("#form-modal").modal("hide");
+                        _this.list(1);
+                        Toast.success("保存成功！");
+                    } else {
+                        Toast.warning(resp.message)
+                    }
+                })
+            },
+
+            /**
+             * 点击【删除】
+             */
+            del(id) {
+                let _this = this;
+                Confirm.show("删除大章后不可恢复，确认删除？", function () {
+                    Loading.show();
+                    _this.$ajax.delete(process.env.VUE_APP_SERVER + '/business/admin/chapter/delete/' + id).then((response)=>{
+                        Loading.hide();
+                        let resp = response.data;
+                        if (resp.success) {
+                            _this.list(1);
+                            Toast.success("删除成功！");
+                        }
+                    })
+                });
+            },
+
+            /**
+             * 点击【小节】
+             */
+            toSection(chapter) {
+                let _this = this;
+                SessionStorage.set(SESSION_KEY_CHAPTER, chapter);
+                _this.$router.push("/business/section");
             }
         }
     }
