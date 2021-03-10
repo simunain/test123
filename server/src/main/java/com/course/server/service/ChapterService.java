@@ -3,6 +3,7 @@ package com.course.server.service;
 import com.course.server.domain.Chapter;
 import com.course.server.domain.Test;
 import com.course.server.domain.TestDemoDto;
+import com.course.server.dto.CategoryDto;
 import com.course.server.dto.Chapterdto;
 import com.course.server.dto.PageDto;
 
@@ -21,4 +22,9 @@ public interface ChapterService {
 
     //保存
     public void save(Chapterdto chapterDto);
+
+    //删除
+    public void delete(String id);
+    //全部分类查询
+    List<CategoryDto> all();
 }

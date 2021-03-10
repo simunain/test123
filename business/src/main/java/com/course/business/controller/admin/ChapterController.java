@@ -3,6 +3,7 @@ package com.course.business.controller.admin;
 
 import ch.qos.logback.classic.Logger;
 import com.course.server.domain.Chapter;
+import com.course.server.dto.CategoryDto;
 import com.course.server.dto.Chapterdto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
@@ -75,6 +76,29 @@ public class ChapterController {
         chapterService.save(chapterDto);
         responseDto.setContent(chapterDto);
 
+        return responseDto;
+    }
+
+
+    /**
+     * 删除
+     */
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public ResponseDto delete(@PathVariable String id) {
+        ResponseDto responseDto = new ResponseDto();
+        chapterService.delete(id);
+        return responseDto;
+    }
+
+    /**
+     * 查询全部分类
+     */
+    @PostMapping("/all")
+    public ResponseDto all() {
+        ResponseDto responseDto = new ResponseDto();
+        List<CategoryDto> categoryDtoList = chapterService.all();
+        responseDto.setContent(categoryDtoList);
         return responseDto;
     }
 

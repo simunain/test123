@@ -1,13 +1,17 @@
 package com.course.server.service.impl;
 
 import com.course.server.domain.*;
+import com.course.server.dto.Category;
+import com.course.server.dto.CategoryDto;
 import com.course.server.dto.Chapterdto;
 import com.course.server.dto.PageDto;
+import com.course.server.mapper.CategoryMapper;
 import com.course.server.mapper.ChapterMapper;
 import com.course.server.mapper.TestDemoMapper;
 import com.course.server.mapper.TestMapper;
 import com.course.server.service.ChapterService;
 import com.course.server.service.TestDemoService;
+import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,6 +28,9 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
     private ChapterMapper chapterMapper;
+    @Autowired
+    private CategoryMapper categoryMapper;
+
 
     //初次使用example
     public List<Chapter>  queryExampleservice() {
@@ -111,6 +118,25 @@ public class ChapterServiceImpl implements ChapterService {
         BeanUtils.copyProperties(chapterDto, chapter);
 
         chapterMapper.insert(chapter);
+    }
+
+
+    /**
+     * 删除
+     */
+    public void delete(String id) {
+        chapterMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 全部分页查询
+     */
+    public List<CategoryDto> all() {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.setOrderByClause("sort asc");
+        List<Category> categoryList = categoryMapper.selectByExample(categoryExample);
+        List<CategoryDto> categoryDtoList = CopyUtil.copyList(categoryList, CategoryDto.class);
+        return categoryDtoList;
     }
 
 }
